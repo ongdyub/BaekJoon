@@ -3,8 +3,8 @@ from collections import deque
 N, M = map(int, input().split(' '))
 
 graph = []
-visit = [[False]*M for _ in range(N)]
-check = [[-1]*M for _ in range(N)]
+visit = [[0]*M for _ in range(N)]
+visit_brk = [[0]*M for _ in range(N)]
 for _ in range(N):
     row = input()
     row_data = []
@@ -30,6 +30,8 @@ while len(Q) > 0:
     yright = min(M-1, y+1)
     yleft = max(0, y-1)
     
+    if graph[x][y] == 0 and check[xup][y] == step - 1 and 
+    
     if not visit[xup][y]:
         if graph[xup][y]:
             if brk:
@@ -37,9 +39,11 @@ while len(Q) > 0:
             else:
                 visit[xup][y] = True
                 Q.append((xup, y, step+1, True))
+                check[xup][y] = step+1
         else:
             visit[xup][y] = True
             Q.append((xup, y, step+1, brk))
+            check[xup][y] = step+1
             
     if not visit[xdown][y]:
         if graph[xdown][y]:
@@ -48,9 +52,11 @@ while len(Q) > 0:
             else:
                 visit[xdown][y] = True
                 Q.append((xdown, y, step+1, True))
+                check[xdown][y] = step+1
         else:
             visit[xdown][y] = True
             Q.append((xdown, y, step+1, brk))
+            check[xdown][y] = step+1
             
     if not visit[x][yleft]:
         if graph[x][yleft]:
@@ -59,9 +65,11 @@ while len(Q) > 0:
             else:
                 visit[x][yleft] = True
                 Q.append((x, yleft, step+1, True))
+                check[x][yleft] = step+1
         else:
             visit[x][yleft] = True
             Q.append((x, yleft, step+1, brk))
+            check[x][yleft] = step+1
             
     if not visit[x][yright]:
         if graph[x][yright]:
@@ -70,9 +78,11 @@ while len(Q) > 0:
             else:
                 visit[x][yright] = True
                 Q.append((x, yright, step+1, True))
+                check[x][yright] = step+1
         else:
             visit[x][yright] = True
             Q.append((x, yright, step+1, brk))
+            check[x][yright] = step+1
             
 if goal:
     print(step)
