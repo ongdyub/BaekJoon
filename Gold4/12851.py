@@ -2,17 +2,20 @@ from collections import deque
 
 N, K = map(int, input().split(' '))
 visit = [False] * 100001
+
 visit_cnt = [0] * 100001
 visit_time = [0] * 100001
 
 Q = deque()
 Q.append((N,0))
 visit_cnt[N] = 1
+
 check = -1
 cnt = 0
 
 while len(Q) > 0:
     cur, step = Q.popleft()
+
     # print(f'{cur} {visit_cnt[cur]} {step}')
     visit[cur] = True
     
